@@ -15,6 +15,7 @@ defmodule Docxir.MixProject do
       package: package(),
       docs: docs(),
       dialyzer: dialyzer(),
+      escript: escript(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -69,6 +70,13 @@ defmodule Docxir.MixProject do
       plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
       flags: [:error_handling, :underspecs],
       ignore_warnings: ".dialyzer_ignore.exs"
+    ]
+  end
+
+  defp escript do
+    [
+      main_module: Docxir.CLI,
+      name: "docxir"
     ]
   end
 end

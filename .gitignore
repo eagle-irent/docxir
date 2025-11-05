@@ -22,6 +22,9 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 docxir-*.tar
 
+# Ignore escript executable (built via "mix escript.build").
+/docxir
+
 # Temporary files, for example, from tests.
 /tmp/
 

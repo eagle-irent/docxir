@@ -20,6 +20,8 @@ Docxir converts Microsoft Word documents (.docx) into clean HTML documents style
 
 ## Installation
 
+### As a Library (Elixir Project)
+
 Add `docxir` to your list of dependencies in `mix.exs`:
 
 ```elixir
@@ -35,6 +37,43 @@ Then run:
 ```bash
 mix deps.get
 ```
+
+### As a Standalone CLI Tool (Escript)
+
+If you don't have Elixir installed but want to use Docxir as a command-line tool:
+
+1. **Requirements**: Only Erlang runtime is needed (no Elixir required)
+   - Install Erlang from [erlang.org](https://www.erlang.org/downloads) or use your package manager:
+     ```bash
+     # macOS
+     brew install erlang
+
+     # Ubuntu/Debian
+     sudo apt-get install erlang
+
+     # Windows
+     # Download from https://www.erlang.org/downloads
+     ```
+
+2. **Get the executable**:
+   - Download the pre-built `docxir` executable from releases
+   - Or build it yourself if you have Elixir:
+     ```bash
+     git clone https://github.com/eagle-irent/docxir.git
+     cd docxir
+     mix deps.get
+     mix escript.build
+     ```
+
+3. **Install** (optional):
+   ```bash
+   # Linux/macOS - make it globally available
+   chmod +x docxir
+   sudo mv docxir /usr/local/bin/
+
+   # Or just run it from current directory
+   ./docxir input.docx output.html
+   ```
 
 ## Usage
 
@@ -57,7 +96,9 @@ Docxir.convert!("contract.docx", "contract.html",
 )
 ```
 
-### From Command Line
+### From Command Line (Mix Task)
+
+If you have the library installed in an Elixir project:
 
 ```bash
 # Basic conversion
@@ -68,6 +109,24 @@ mix docxir contract.docx contract.html --title "Rental Agreement"
 
 # With custom language
 mix docxir document.docx output.html --lang en --title "My Document"
+```
+
+### Standalone CLI (Escript)
+
+If you're using the standalone executable:
+
+```bash
+# Show help
+docxir --help
+
+# Basic conversion
+docxir input.docx output.html
+
+# With custom title
+docxir contract.docx contract.html --title "Rental Agreement"
+
+# With custom language and title
+docxir document.docx output.html --lang en --title "My Document"
 ```
 
 ## Options
@@ -146,6 +205,25 @@ This is an MVP implementation focused on common document features. The following
 - Comments and track changes
 
 ## Development
+
+### Building the Escript
+
+To build the standalone CLI executable:
+
+```bash
+# Development build
+mix escript.build
+
+# Production build (optimized)
+MIX_ENV=prod mix deps.get
+MIX_ENV=prod mix escript.build
+```
+
+This will generate a `docxir` executable file (~4.4MB) in the project root. The executable includes all dependencies and can be distributed to users who only have Erlang installed.
+
+**Note**: The escript executable is not tracked in git. Users should either:
+- Download pre-built executables from [GitHub Releases](https://github.com/eagle-irent/docxir/releases)
+- Build it themselves using the commands above
 
 ### Running Tests
 
