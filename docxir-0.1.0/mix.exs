@@ -59,7 +59,7 @@ defmodule Docxir.MixProject do
     [
       main: "Docxir",
       source_url: @source_url,
-      extras: ["README.md", "LICENSE"]
+      extras: ["README.md"]
     ]
   end
 

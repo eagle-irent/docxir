@@ -33,4 +33,4 @@ docxir-*.tar
 /priv/plts/
 
 
-.claude/
+/.claude/*
